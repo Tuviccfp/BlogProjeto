@@ -1,0 +1,47 @@
+<%- include('../../partials/head.ejs') %>
+<body>
+    <%- include('../../partials/navbar.ejs') %>
+
+    <div class="container">
+        <br>
+        <h3>Categorias</h3>
+        <hr>
+
+        <div class="new-category">
+            <h6>Criar nova categoria:</h6> <a href="/admin/categories/new"><button class="btn btn-primary">Nova Categoria</button></a> <br><br>
+        </div>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Slug</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% categories.forEach(categories => { %>
+                    <tr>
+                        <th><%= categories.id %></th>
+                        <th><%= categories.title %></th>
+                        <th><%= categories.slug %></th>
+                        <th><%= categories.createdAt %></th>
+                        <th>
+                            
+                            <a href="/admin/categories/edit/<%= categories.id %>"><button class="btn btn-warning">Editar</button></a>
+                            
+                            <form method="POST" action="/admin/categories/delete" style="display: inline;">
+                                <input type="hidden" name="id" value="<%= categories.id %>"/>
+                                <button class="btn btn-danger">Deletar</button></a>
+                            </form>   
+                        </th>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+<%- include('../../partials/footer.ejs') %>
